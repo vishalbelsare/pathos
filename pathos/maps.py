@@ -87,21 +87,21 @@ class Map(object):
         "close the map to any new jobs"
         try:
             self._pool.close()
-        except AttributeError:
+        except (AttributeError, NotImplementedError) as e:
             pass
 
     def join(self): #NOTE: ValueError on running pool
         "reclaim the closed workers"
         try:
             self._pool.join()
-        except AttributeError:
+        except (AttributeError, NotImplementedError) as e:
             pass
 
     def clear(self):
         "remove pool singleton, if exists"
         try:
             self._pool.clear()
-        except AttributeError:
+        except (AttributeError, NotImplementedError) as e:
             pass
 
     def __del__(self):
